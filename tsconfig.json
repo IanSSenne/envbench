@@ -7,7 +7,7 @@
 		"target": "ES2022",
 		"moduleResolution": "node",
 		"strict": true,
-		"types": ["node"],
+		"types": ["quickjs-types"],
 		"resolveJsonModule": true,
 		"allowSyntheticDefaultImports": true,
 		"allowUmdGlobalAccess": true,

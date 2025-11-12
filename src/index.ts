@@ -1,3 +1,5 @@
+import './qjs-loader'
+// ^^^ MUST BE THE FIRST THING RUN
 import './env'
 // The order of these imports is important
 import './commands//'

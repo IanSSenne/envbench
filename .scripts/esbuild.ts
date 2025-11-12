@@ -1,3 +1,4 @@
+
 import chalk from 'chalk'
 import { Command } from 'commander'
 import ESBuild from 'esbuild'
@@ -110,6 +111,7 @@ const DEFAULT_BUILD_OPTIONS: ESBuild.BuildOptions = {
 	entryPoints: ['./src/index.ts'],
 	outfile: `./dist/${PACKAGE.name as string}.js`,
 	bundle: true,
+	target: "es2023",
 	minify: false,
 	sourcemap: 'inline',
 	platform: 'node',
@@ -118,10 +120,16 @@ const DEFAULT_BUILD_OPTIONS: ESBuild.BuildOptions = {
 		'.ttf': 'binary',
 		'': 'text', // Fix for terminal-kit's README being loaded as JavaScript
 	},
+	alias: {
+		// path: await polyfillPath("path"),
+		// path: await polyfillPath("path")
+	},
+	external: ["os", "std"],
 	plugins: [INFO_PLUGIN, ImportFolder()],
 	define: DEFINES,
-	external: ['terminal-kit'],
+	// external: ['terminal-kit'],
 	treeShaking: true,
+	format: "esm"
 }
 
 async function buildDev() {
@@ -140,11 +148,11 @@ function buildProd() {
 }
 
 async function main() {
-	if (process.env.NODE_ENV === 'development') {
-		await buildDev()
-		return
-	}
-	buildProd()
+	// if (process.env.NODE_ENV === 'development') {
+	await buildDev()
+	// 	return
+	// }
+	// buildProd()
 }
 
 void main()

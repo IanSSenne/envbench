@@ -1,0 +1,40 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  build-envbench:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: envbench-build-js
+          path: dist/envbench.js
+  build-quickjs:
+    runs-on: windows-latest
+    needs: build-envbench
+    steps:
+      - uses: actions/checkout@v4
+      - name: build QuickJS
+        run: |
+          cd deps/quickjs
+          make
+      - name: Download Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: envbench-build-js
+      - name: debug
+        run: ls -la
+      - name: make-exe
+        run: ./deps/quickjs/qjsc -o envbench-quickjs ./envbench.js
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: qjsc
+          path: dep/quickjs/qjsc
