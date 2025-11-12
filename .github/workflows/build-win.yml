@@ -21,6 +21,9 @@ jobs:
     needs: build-envbench
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0 # Optional: Fetch all history for submodules if needed
       - name: build QuickJS
         run: |
           cd deps/quickjs
