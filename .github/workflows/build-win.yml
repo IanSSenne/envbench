@@ -26,7 +26,7 @@ jobs:
           cd deps/quickjs
           make
       - name: Download Artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: envbench-build-js
       - name: debug
