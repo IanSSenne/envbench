@@ -12,7 +12,7 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn build
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: envbench-build-js
           path: dist/envbench.js
@@ -34,7 +34,7 @@ jobs:
       - name: make-exe
         run: ./deps/quickjs/qjsc -o envbench-quickjs ./envbench.js
       - name: Upload Artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: qjsc
           path: dep/quickjs/qjsc
