@@ -148,11 +148,11 @@ function buildProd() {
 }
 
 async function main() {
-	// if (process.env.NODE_ENV === 'development') {
-	await buildDev()
-	// 	return
-	// }
-	// buildProd()
+	if (process.env.NODE_ENV === 'development') {
+		await buildDev()
+		return
+	}
+	buildProd()
 }
 
 void main()
